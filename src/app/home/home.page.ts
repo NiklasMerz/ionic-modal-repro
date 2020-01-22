@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal';
+
 
 @Component({
   selector: 'app-home',
@@ -6,7 +9,22 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  modal: HTMLIonModalElement;
 
-  constructor() {}
+  constructor(public modalController: ModalController) {
+    this.createModal();
+  }
 
+  async createModal() {
+    this.modal = await this.modalController.create({
+      component: ModalPage
+    });
+    this.modal.onDidDismiss().then((res) => {
+      console.debug("Res", res);
+    });
+  }
+
+  presentModal() {
+    return this.modal.present();
+  }
 }
