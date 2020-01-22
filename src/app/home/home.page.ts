@@ -16,15 +16,16 @@ export class HomePage {
   }
 
   async createModal() {
+    
+  }
+
+  async presentModal() {
     this.modal = await this.modalController.create({
       component: ModalPage
     });
     this.modal.onDidDismiss().then((res) => {
       console.debug("Res", res);
     });
-  }
-
-  presentModal() {
     return this.modal.present();
   }
 }
